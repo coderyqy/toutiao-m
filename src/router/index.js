@@ -9,6 +9,7 @@ const Home = () => import('@/views/home/Home')
 const QA = () => import('@/views/qa/QA')
 const Video = () => import('@/views/video/Video')
 const Profile = () => import('@/views/profile/Profile')
+const Edit = () => import('@/views/profile/Edit')
 
 Vue.use(VueRouter)
 
@@ -50,6 +51,11 @@ const routes = [
         component: Profile
       }
     ]
+  },
+  { 
+    path: '/edit', 
+    name:'edit', 
+    component: Edit 
   }
 ]
 
