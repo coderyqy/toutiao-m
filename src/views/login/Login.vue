@@ -85,13 +85,12 @@ export default {
       // 3.请求调用方法
       try {
         const { data } = await login(this.user);
-        console.log(res);
         Toast.success("登录成功");
-
         // 将后端返回的用户登录状态放到VueX容器中
-        this.$store.commit('setUser', res.data.data)
+        this.$store.commit('setUser', data.data)
       } catch (error) {
         // 4.处理响应结果
+        console.log(error);
         Toast.fail("登录失败，手机号或验证码错误");
       }
     },
