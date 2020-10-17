@@ -88,6 +88,7 @@ export default {
         Toast.success("登录成功");
         // 将后端返回的用户登录状态放到VueX容器中
         this.$store.commit('setUser', data.data)
+        this.$router.push("/profile");
       } catch (error) {
         // 4.处理响应结果
         console.log(error);
