@@ -15,6 +15,9 @@ export default new Vuex.Store({
     setUser(state, data){
       state.user = data
       setItem(USER_KEY, state.user)
+    },
+    removeUser(){
+      removeItem(USER_KEY)
     }
   },
   actions: {

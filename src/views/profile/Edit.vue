@@ -26,6 +26,32 @@
             show-word-limit
          />
     </van-popup>
+     <van-cell is-link @click="showSex = true">性别
+        <span class="right-item">男</span>
+    </van-cell>
+    <van-popup class="popup-bg" v-model="showSex"  position="bottom" :style="{ height: '50%' }" >
+        <van-picker
+            title="性别"
+            show-toolbar
+            :columns="sexList"
+            @confirm="onSexConfirm"
+            @cancel="showSex = false"
+            />
+    </van-popup>
+    <van-cell is-link @click="showBirth = true">出生日期
+        <span class="right-item">{{ birthday }}</span>
+    </van-cell>
+    <van-popup class="popup-bg" v-model="showBirth"  position="bottom" :style="{ height: '50%' }" >
+        <van-datetime-picker
+            v-model="currentDate"
+            type="date"
+            title="选择年月日"
+            :min-date="minDate"
+            :max-date="maxDate"
+            @cancel="showBirth = false"
+            @confirm="onBirthConfirm"
+        />
+    </van-popup>
   </div>    
 </template>
 
@@ -34,7 +60,14 @@ export default {
     name:'edit',
     data(){
         return {
-            showName: false,
+            showName: false, // 姓名弹出层
+            showSex: false, // 性别弹出层
+            showBirth: false, // 出生日期弹出层
+            sexList: ['男','女'],
+            birthday: '2020-10-18',
+            minDate: new Date(1999, 0, 1),
+            maxDate: new Date(),
+            currentDate: new Date(),
             message: ''
         }
     },
@@ -45,6 +78,15 @@ export default {
                 position:'top'
             })
             this.showName = false
+        },
+        onSexConfirm(value, index){ // 修改性别确认
+            this.$toast({
+                message: value+index,
+                position:'top'
+            })
+        },
+        onBirthConfirm(aa){
+            console.log(aa);
         }
     }
 }
