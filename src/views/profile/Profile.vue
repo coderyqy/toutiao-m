@@ -2,7 +2,7 @@
   <div class="home-container">
     <div class="top-info">
       <!-- 登录前显示 -->
-      <div @click="$router.push('/login')" v-if="!$store.state.user">
+      <div @click="$router.push('/login')" v-if="!user">
         <div class="login-wrap">
           <van-image
             class="login-img"
@@ -10,7 +10,7 @@
             src="https://img.yzcdn.cn/vant/cat.jpeg"
           />
         </div>
-        <p class="login-btn">注册/登录</p>
+        <p class="login-btn">点击登录</p>
       </div>
 
       <!-- 登录后显示 -->
@@ -54,6 +54,9 @@
       <van-grid-item class="item item-border" icon="star-o" text="收藏" />
       <van-grid-item class="item" icon="eye-o" text="历史" />
     </van-grid>
+    <van-notice-bar v-if="user" class="chat" color="#999" background="#fff" mode="link"
+      >消息通知</van-notice-bar
+    >
     <van-notice-bar class="chat" color="#999" background="#fff" mode="link"
       >小智同学</van-notice-bar
     >
@@ -88,22 +91,18 @@ export default {
     },
     loginOut() {
       this.$dialog.confirm({
-        title: "标题",
-        message: "弹窗内容",
-      })
-        .then(() => {
+        message: "是否退出登录？",
+      }).then(() => {
           // on confirm
           // 如果直接移除本地存储中的user，视图是不会响应变化的，置空的话可以使视图发生变化
           this.$store.commit("setUser", null);
-        })
-        .catch(() => {
+        }).catch(() => {
           // on cancel
         })
     },
     async loadCurrentUser(){
       const {data} = await getCurrentUser();
       this.currentUser = data.data;
-      console.log(this.currentUser);
     }
   },
   computed: {
@@ -140,7 +139,7 @@ export default {
   justify-items: center;
   align-items: center;
   .edit-btn {
-    height: 30px;
+    height: 24px;
     margin-left: auto;
     color: #000;
     background-color: #fff;
@@ -168,20 +167,37 @@ p {
 .chat {
   margin: 12px 0;
 }
-
-.login-btn {
-  margin-top: 16px;
-  text-align: center;
-  font-size: 16px;
+.review-avatar {
+  .review-avatar-wrap {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    .login-avatar {
+      width: 80px;
+      height: 80px;
+      border: 2px solid #fff;
+    }
+  }
+  .login-tips {
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 10px;
+  }
 }
-.login-wrap {
-  margin-top: 20px;
+.login-wrap{
   display: flex;
   justify-content: center;
   align-content: center;
-  .login-img {
+  .login-img{
     width: 80px;
     height: 80px;
   }
 }
+.login-btn{
+    margin-top: 12px;
+    font-size: 16px;
+    text-align: center;
+}
+
 </style>

@@ -2,7 +2,7 @@
 
 import request from '@/utils/request'
 // 在非组件模块中获取store，必须单独加载store
-import store from '@/store/'
+// import store from '@/store/'
 
 
 // 注册登录
@@ -19,8 +19,8 @@ export const getCurrentUser = () => {
   return request({
     method: 'GET',
     url: '/app/v1_0/user',
-    headers: {
-      Authorization: `Bearer ${store.state.user.token}`
-    }
+    // headers: {
+    //   Authorization: `Bearer ${store.state.user.token}`
+    // }
   })
 }

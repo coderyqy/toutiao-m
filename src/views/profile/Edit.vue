@@ -5,6 +5,15 @@
       left-arrow
       @click-left="$router.back()"
     />
+    <van-cell is-link >头像
+        <span class="right-item">
+            <van-image
+                class="login-avatar"
+                round
+                src="https://img.yzcdn.cn/vant/cat.jpeg"
+            />
+        </span>
+    </van-cell>
     <van-cell is-link @click="showName = true">昵称
         <span class="right-item">{{ $store.state.user.name }}</span>
     </van-cell>
@@ -14,7 +23,7 @@
         left-text="取消"
         right-text="完成"
         @click-left="showName = false"
-        @click-right="onClickRight"
+        @click-right="onNameClickRight"
         />
         <van-field
             v-model="message"
@@ -72,7 +81,7 @@ export default {
         }
     },
     methods: {
-        onClickRight(){
+        onNameClickRight(){
             this.$toast({
                 message: '修改成功',
                 position:'top'
@@ -99,5 +108,9 @@ export default {
 .right-item{
     float: right;
     color: #999;
+}
+.login-avatar{
+    width: 22px;
+    height: 22px;
 }
 </style>
